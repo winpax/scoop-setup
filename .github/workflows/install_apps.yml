@@ -31,13 +31,13 @@ jobs:
       - if: >
           ${{ github.event_name == 'push'
           || github.event_name == 'workflow_dispatch' }}
-        uses: winpax/setup-scoop@main
+        uses: winpax/scoop-setup@main
         with:
           buckets: extras
           apps: plantuml doxygen handbrake-cli
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/setup-scoop@v4
+        uses: winpax/scoop-setup@v4
         with:
           buckets: extras
           apps: plantuml doxygen handbrake-cli
@@ -69,14 +69,14 @@ jobs:
       - if: >
           ${{ github.event_name == 'push'
           || github.event_name == 'workflow_dispatch' }}
-        uses: winpax/setup-scoop@main
+        uses: winpax/scoop-setup@main
         with:
           buckets: extras
           apps: -foobar
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/setup-scoop@v4
+        uses: winpax/scoop-setup@v4
         with:
           buckets: extras
           apps: -foobar

@@ -1,4 +1,4 @@
-name: "Setup Scoop"
+name: "Scoop Setup"
 description: >-
   Install apps to Windows runner by scoop,
   and update PATH of your workflow.
@@ -51,14 +51,14 @@ runs:
         if('${{ inputs.update_path }}' -eq 'true') {
             Join-Path (Resolve-Path ~).Path "scoop\shims" >> $Env:GITHUB_PATH
         }
-        Write-Host 'setup-scoop: inputs.buckets ${{ inputs.buckets }}'
+        Write-Host 'scoop-setup: inputs.buckets ${{ inputs.buckets }}'
         $param_buckets_string = "${{ inputs.buckets }}"
         if ($param_buckets_string) {
             ${{ env.SCRIPTS_PATH }}\add_buckets.ps1 "$param_buckets_string"
         }
         if('${{ inputs.update }}' -eq 'true') {scoop update}
         if('${{ inputs.checkup }}' -eq 'true') {scoop checkup}
-        Write-Host 'setup-scoop: inputs.apps ${{ inputs.apps }}'
+        Write-Host 'scoop-setup: inputs.apps ${{ inputs.apps }}'
         $param_apps_string = "${{ inputs.apps }}"
         if ($param_apps_string) {
             ${{ env.SCRIPTS_PATH }}\install_apps.ps1 "$param_apps_string"

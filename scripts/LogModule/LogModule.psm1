@@ -1,4 +1,4 @@
 Function Write-Log([string]$LogMessage)
 {
-    Write-Host setup-scoop: $LogMessage
+    Write-Host scoop-setup: $LogMessage
 }

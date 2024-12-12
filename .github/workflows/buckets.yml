@@ -30,12 +30,12 @@ jobs:
       - if: >
           ${{ github.event_name == 'workflow_dispatch'
           || github.event_name == 'push' }}
-        uses: winpax/setup-scoop@main
+        uses: winpax/scoop-setup@main
         with:
           buckets: java games php
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/setup-scoop@v4
+        uses: winpax/scoop-setup@v4
         with:
           buckets: java games php
 
@@ -70,13 +70,13 @@ jobs:
       - if: >
           ${{ github.event_name == 'workflow_dispatch'
           || github.event_name == 'push' }}
-        uses: winpax/setup-scoop@main
+        uses: winpax/scoop-setup@main
         with:
           buckets: java -add
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/setup-scoop@main
+        uses: winpax/scoop-setup@main
         with:
           buckets: java -add
         continue-on-error: true
@@ -101,12 +101,12 @@ jobs:
       - if: >
           ${{ github.event_name == 'workflow_dispatch'
           || github.event_name == 'push' }}
-        uses: winpax/setup-scoop@main
+        uses: winpax/scoop-setup@main
         with:
           buckets: extras
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/setup-scoop@v4
+        uses: winpax/scoop-setup@v4
         with:
           buckets: extras
 
@@ -138,13 +138,13 @@ jobs:
       - if: >
           ${{ github.event_name == 'workflow_dispatch'
           || github.event_name == 'push' }}
-        uses: winpax/setup-scoop@main
+        uses: winpax/scoop-setup@main
         with:
           buckets: unknown
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/setup-scoop@v4
+        uses: winpax/scoop-setup@v4
         with:
           buckets: unknown
         continue-on-error: true

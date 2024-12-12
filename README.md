@@ -1,13 +1,13 @@
-# setup-scoop
+# Scoop Setup
 
-![Status of buckets](https://github.com/winpax/setup-scoop/actions/workflows/buckets.yml/badge.svg?event=schedule)
-![Status of default usage](https://github.com/winpax/setup-scoop/actions/workflows/default_usage.yml/badge.svg?event=schedule)
-![Status of install apps](https://github.com/winpax/setup-scoop/actions/workflows/install_apps.yml/badge.svg?event=schedule)
-![Status of obsoleted parameters](https://github.com/winpax/setup-scoop/actions/workflows/obsoleted_parameters.yml/badge.svg?event=schedule)
-![Status of run as admin](https://github.com/winpax/setup-scoop/actions/workflows/run_as_admin.yml/badge.svg?event=schedule)
-![Status of update path](https://github.com/winpax/setup-scoop/actions/workflows/update_path.yml/badge.svg?event=schedule)
+![Status of buckets](https://github.com/winpax/scoop-setup/actions/workflows/buckets.yml/badge.svg?event=schedule)
+![Status of default usage](https://github.com/winpax/scoop-setup/actions/workflows/default_usage.yml/badge.svg?event=schedule)
+![Status of install apps](https://github.com/winpax/scoop-setup/actions/workflows/install_apps.yml/badge.svg?event=schedule)
+![Status of obsoleted parameters](https://github.com/winpax/scoop-setup/actions/workflows/obsoleted_parameters.yml/badge.svg?event=schedule)
+![Status of run as admin](https://github.com/winpax/scoop-setup/actions/workflows/run_as_admin.yml/badge.svg?event=schedule)
+![Status of update path](https://github.com/winpax/scoop-setup/actions/workflows/update_path.yml/badge.svg?event=schedule)
 
-- `setup-scoop` action provides functions below
+- `scoop-setup` action provides functions below
   - Install `scoop` to your Windows runner
   - Update `PATH` environment variable
   - Install applications by `scoop`
@@ -17,7 +17,7 @@
 - If you want to install "Doxygen" and "PlantUML", put codes like this into your workflow YAML
 
 ```yaml
-- uses: winpax/setup-scoop@v4
+- uses: winpax/scoop-setup@v4
   with:
     buckets: extras
     apps: doxygen plantuml
@@ -110,7 +110,7 @@ jobs:
           key: cache_version_${{ env.cache_version }}-${{ hashFiles(env.cache_hash_seed_file_path) }}
 
       - name: Install scoop (Windows)
-        uses: winpax/setup-scoop@v4
+        uses: winpax/scoop-setup@v4
         if: steps.restore_cache.outputs.cache-hit != 'true'
         with:
           install_scoop: "true"
@@ -120,7 +120,7 @@ jobs:
           update_path: "true"
 
       - name: Setup scoop PATH (Windows)
-        uses: winpax/setup-scoop@v4
+        uses: winpax/scoop-setup@v4
         if: steps.restore_cache.outputs.cache-hit == 'true'
         with:
           install_scoop: "false"
