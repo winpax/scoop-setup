@@ -10,17 +10,17 @@
 - `scoop-setup` action provides functions below
   - Install `scoop` to your Windows runner
   - Update `PATH` environment variable
-  - Install applications by `scoop`
+  - Install applications with `scoop`
 
-## Sample usage
+## Example
 
-- If you want to install "Doxygen" and "PlantUML", put codes like this into your workflow YAML
+- If you want to install "sfsu" and "trunk", put codes like this into your workflow YAML
 
 ```yaml
 - uses: winpax/scoop-setup@v4
   with:
     buckets: extras
-    apps: doxygen plantuml
+    apps: sfsu trunk
 ```
 
 ## Supported environments
@@ -42,13 +42,12 @@ with:
 
 - If `true` (default), `scoop` will be installed
 - If `false`, `scoop` will not be installed
-  - For example, it is unnecessary to install scoop because cached `~/scoop/` will be recovered
+  - For example, if scoop was restored from cache, you can skip installation
 
 ### `run_as_admin`
 
-- If `true` (default), `scoop` will be installed with option `-RunAsAdmin`
+- If `true` (default), `scoop` will be installed with `-RunAsAdmin`
   - Windows Runners provided by GitHub may need this, because currently they run with Administrator privilege
-- If `false`, `scoop` will be installed without option `-RunAsAdmin`
 
 ### `buckets`
 
@@ -60,29 +59,26 @@ with:
 ### `apps`
 
 - Specify application(s) to add
-  - Delimit several applications by white space like as `plantuml doxygen`
+  - Multiple applications should be delimited by white space (e.g `sfsu trunk`)
 - This parameter is optional, no applications will be installed if omitted
 
 ### `update`
 
-- If `true` (default), `scoop update` will be processed after installation
-- If `false`, it will not
+- If `true` (default), `scoop update` will be run after installation
 
 ### `checkup`
 
-- If `true`, `scoop checkup` will be processed after installation
-- If `false` (default), it will not
+- If `true`, `scoop checkup` will be run after installation
 
 ### `update_path`
 
-- If `true` (default), path to `scoop` will be added into environment variable `PATH`
-- If `false`, environment variable `PATH` will not be updated
+- If `true` (default), path to `scoop` will be added to the `PATH` environment variable
 
 ## Advanced usage
 
 ### Sample to improve workflow performance with `actions/cache`
 
-- If cache is available, `install_scoop` will be `false` to skip installation and only `update_path` will be `true`
+- If cache is available, `install_scoop` should be `false` to skip installation
 - Include `packages_to_install` into cache seed to validate cache is including enough apps or not
 - Increment `cache_version` if cache should be expired without changing `packages_to_install`
 
