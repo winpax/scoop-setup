@@ -1,11 +1,11 @@
 # Scoop Setup
 
-![Status of buckets](https://github.com/winpax/scoop-setup/actions/workflows/buckets.yml/badge.svg?event=schedule)
-![Status of default usage](https://github.com/winpax/scoop-setup/actions/workflows/default_usage.yml/badge.svg?event=schedule)
-![Status of install apps](https://github.com/winpax/scoop-setup/actions/workflows/install_apps.yml/badge.svg?event=schedule)
-![Status of obsoleted parameters](https://github.com/winpax/scoop-setup/actions/workflows/obsoleted_parameters.yml/badge.svg?event=schedule)
-![Status of run as admin](https://github.com/winpax/scoop-setup/actions/workflows/run_as_admin.yml/badge.svg?event=schedule)
-![Status of update path](https://github.com/winpax/scoop-setup/actions/workflows/update_path.yml/badge.svg?event=schedule)
+![Status of buckets](https://github.com/winpax/scoop-setup/actions/workflows/buckets.yml/badge.svg)
+![Status of default usage](https://github.com/winpax/scoop-setup/actions/workflows/default_usage.yml/badge.svg)
+![Status of install apps](https://github.com/winpax/scoop-setup/actions/workflows/install_apps.yml/badge.svg)
+![Status of obsoleted parameters](https://github.com/winpax/scoop-setup/actions/workflows/obsoleted_parameters.yml/badge.svg)
+![Status of run as admin](https://github.com/winpax/scoop-setup/actions/workflows/run_as_admin.yml/badge.svg)
+![Status of update path](https://github.com/winpax/scoop-setup/actions/workflows/update_path.yml/badge.svg)
 
 - `scoop-setup` action provides functions below
   - Install `scoop` to your Windows runner
