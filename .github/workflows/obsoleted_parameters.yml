@@ -25,21 +25,21 @@ jobs:
         name: Run actions locally
         uses: ./
         with:
-          add_extras_bucket: 'true'
+          add_extras_bucket: "true"
         continue-on-error: true
 
       - if: >
           ${{ github.event_name == 'push'
           || github.event_name == 'workflow_dispatch' }}
-        uses: MinoruSekine/setup-scoop@main
+        uses: winpax/setup-scoop@main
         with:
-          add_extras_bucket: 'true'
+          add_extras_bucket: "true"
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: MinoruSekine/setup-scoop@v4.0.1
+        uses: winpax/setup-scoop@v4
         with:
-          add_extras_bucket: 'true'
+          add_extras_bucket: "true"
         continue-on-error: true
 
       - name: Validate extras bucket is not available
@@ -64,21 +64,21 @@ jobs:
         name: Run actions locally
         uses: ./
         with:
-          add_nonportable_bucket: 'true'
+          add_nonportable_bucket: "true"
         continue-on-error: true
 
       - if: >
           ${{ github.event_name == 'push'
           || github.event_name == 'workflow_dispatch' }}
-        uses: MinoruSekine/setup-scoop@main
+        uses: winpax/setup-scoop@main
         with:
-          add_nonportable_bucket: 'true'
+          add_nonportable_bucket: "true"
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: MinoruSekine/setup-scoop@v4.0.1
+        uses: winpax/setup-scoop@v4
         with:
-          add_nonportable_bucket: 'true'
+          add_nonportable_bucket: "true"
         continue-on-error: true
 
       - name: Validate nonportable bucket is not available

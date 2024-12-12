@@ -1,11 +1,11 @@
 # setup-scoop
 
-![Status of buckets](https://github.com/MinoruSekine/setup-scoop/actions/workflows/buckets.yml/badge.svg?event=schedule)
-![Status of default usage](https://github.com/MinoruSekine/setup-scoop/actions/workflows/default_usage.yml/badge.svg?event=schedule)
-![Status of install apps](https://github.com/MinoruSekine/setup-scoop/actions/workflows/install_apps.yml/badge.svg?event=schedule)
-![Status of obsoleted parameters](https://github.com/MinoruSekine/setup-scoop/actions/workflows/obsoleted_parameters.yml/badge.svg?event=schedule)
-![Status of run as admin](https://github.com/MinoruSekine/setup-scoop/actions/workflows/run_as_admin.yml/badge.svg?event=schedule)
-![Status of update path](https://github.com/MinoruSekine/setup-scoop/actions/workflows/update_path.yml/badge.svg?event=schedule)
+![Status of buckets](https://github.com/winpax/setup-scoop/actions/workflows/buckets.yml/badge.svg?event=schedule)
+![Status of default usage](https://github.com/winpax/setup-scoop/actions/workflows/default_usage.yml/badge.svg?event=schedule)
+![Status of install apps](https://github.com/winpax/setup-scoop/actions/workflows/install_apps.yml/badge.svg?event=schedule)
+![Status of obsoleted parameters](https://github.com/winpax/setup-scoop/actions/workflows/obsoleted_parameters.yml/badge.svg?event=schedule)
+![Status of run as admin](https://github.com/winpax/setup-scoop/actions/workflows/run_as_admin.yml/badge.svg?event=schedule)
+![Status of update path](https://github.com/winpax/setup-scoop/actions/workflows/update_path.yml/badge.svg?event=schedule)
 
 - `setup-scoop` action provides functions below
   - Install `scoop` to your Windows runner
@@ -15,11 +15,12 @@
 ## Sample usage
 
 - If you want to install "Doxygen" and "PlantUML", put codes like this into your workflow YAML
+
 ```yaml
-      - uses: MinoruSekine/setup-scoop@v4.0.1
-        with:
-          buckets: extras
-          apps: doxygen plantuml
+- uses: winpax/setup-scoop@v4
+  with:
+    buckets: extras
+    apps: doxygen plantuml
 ```
 
 ## Supported environments
@@ -30,10 +31,11 @@
 ## Parameters
 
 - Parameters can be specified by `with:` like this
+
 ```yaml
-        with:
-          buckets: extras
-          scoop_checkup: 'true'
+with:
+  buckets: extras
+  checkup: "true"
 ```
 
 ### `install_scoop`
@@ -61,12 +63,12 @@
   - Delimit several applications by white space like as `plantuml doxygen`
 - This parameter is optional, no applications will be installed if omitted
 
-### `scoop_update`
+### `update`
 
 - If `true` (default), `scoop update` will be processed after installation
 - If `false`, it will not
 
-### `scoop_checkup`
+### `checkup`
 
 - If `true`, `scoop checkup` will be processed after installation
 - If `false` (default), it will not
@@ -79,45 +81,49 @@
 ## Advanced usage
 
 ### Sample to improve workflow performance with `actions/cache`
+
 - If cache is available, `install_scoop` will be `false` to skip installation and only `update_path` will be `true`
 - Include `packages_to_install` into cache seed to validate cache is including enough apps or not
 - Increment `cache_version` if cache should be expired without changing `packages_to_install`
+
 ```yaml
 env:
   packages_to_install: shellcheck
   cache_version: v0
-  cache_hash_seed_file_path: './.github/workflows/cache_seed_file_for_scoop.txt'
+  cache_hash_seed_file_path: "./.github/workflows/cache_seed_file_for_scoop.txt"
 ```
+
 (snipped)
+
 ```yaml
 jobs:
   build:
     steps:
-    - name: Create cache seed file
-      run: echo ${{ env.packages_to_install }} >> ${{ env.cache_hash_seed_file_path }}
+      - name: Create cache seed file
+        run: echo ${{ env.packages_to_install }} >> ${{ env.cache_hash_seed_file_path }}
 
-    - name: Restore cache if available
-      id: restore_cache
-      uses: actions/cache@v4
-      with:
-        path: ${{ matrix.to_cache_dir }}
-        key: cache_version_${{ env.cache_version }}-${{ hashFiles(env.cache_hash_seed_file_path) }}
+      - name: Restore cache if available
+        id: restore_cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ matrix.to_cache_dir }}
+          key: cache_version_${{ env.cache_version }}-${{ hashFiles(env.cache_hash_seed_file_path) }}
 
-    - name: Install scoop (Windows)
-      uses: MinoruSekine/setup-scoop@v4.0.1
-      if: steps.restore_cache.outputs.cache-hit != 'true'
-      with:
-        install_scoop: 'true'
-        buckets: extras
-        apps: ${{ env.packages_to_install }}
-        scoop_update: 'true'
-        update_path: 'true'
+      - name: Install scoop (Windows)
+        uses: winpax/setup-scoop@v4
+        if: steps.restore_cache.outputs.cache-hit != 'true'
+        with:
+          install_scoop: "true"
+          buckets: extras
+          apps: ${{ env.packages_to_install }}
+          update: "true"
+          update_path: "true"
 
-    - name: Setup scoop PATH (Windows)
-      uses: MinoruSekine/setup-scoop@v4.0.1
-      if: steps.restore_cache.outputs.cache-hit == 'true'
-      with:
-        install_scoop: 'false'
-        scoop_update: 'false'
-        update_path: 'true'
+      - name: Setup scoop PATH (Windows)
+        uses: winpax/setup-scoop@v4
+        if: steps.restore_cache.outputs.cache-hit == 'true'
+        with:
+          install_scoop: "false"
+          update: "false"
+          update_path: "true"
 ```

@@ -6,7 +6,7 @@ branding:
   icon: "hard-drive"
   color: "green"
 inputs:
-  scoop:
+  install_scoop:
     description: "Install scoop if true (default)"
     required: true
     default: "true"
