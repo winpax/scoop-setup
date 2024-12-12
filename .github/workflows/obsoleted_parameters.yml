@@ -25,7 +25,7 @@ jobs:
         name: Run actions locally
         uses: ./
         with:
-          add_extras_bucket: "true"
+          buckets: extras
         continue-on-error: true
 
       - if: >
@@ -33,13 +33,13 @@ jobs:
           || github.event_name == 'workflow_dispatch' }}
         uses: winpax/scoop-setup@main
         with:
-          add_extras_bucket: "true"
+          buckets: extras
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v1
+        uses: winpax/scoop-setup@v1.0.0
         with:
-          add_extras_bucket: "true"
+          buckets: extras
         continue-on-error: true
 
       - name: Validate extras bucket is not available
@@ -64,7 +64,7 @@ jobs:
         name: Run actions locally
         uses: ./
         with:
-          add_nonportable_bucket: "true"
+          buckets: nonportable
         continue-on-error: true
 
       - if: >
@@ -72,13 +72,13 @@ jobs:
           || github.event_name == 'workflow_dispatch' }}
         uses: winpax/scoop-setup@main
         with:
-          add_nonportable_bucket: "true"
+          buckets: nonportable
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v1
+        uses: winpax/scoop-setup@v1.0.0
         with:
-          add_nonportable_bucket: "true"
+          buckets: nonportable
         continue-on-error: true
 
       - name: Validate nonportable bucket is not available

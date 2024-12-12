@@ -17,7 +17,7 @@
 - If you want to install "sfsu" and "trunk", put codes like this into your workflow YAML
 
 ```yaml
-- uses: winpax/scoop-setup@v1
+- uses: winpax/scoop-setup@v1.0.0
   with:
     buckets: extras
     apps: sfsu trunk
@@ -106,7 +106,7 @@ jobs:
           key: cache_version_${{ env.cache_version }}-${{ hashFiles(env.cache_hash_seed_file_path) }}
 
       - name: Install scoop (Windows)
-        uses: winpax/scoop-setup@v1
+        uses: winpax/scoop-setup@v1.0.0
         if: steps.restore_cache.outputs.cache-hit != 'true'
         with:
           install_scoop: "true"
@@ -116,7 +116,7 @@ jobs:
           update_path: "true"
 
       - name: Setup scoop PATH (Windows)
-        uses: winpax/scoop-setup@v1
+        uses: winpax/scoop-setup@v1.0.0
         if: steps.restore_cache.outputs.cache-hit == 'true'
         with:
           install_scoop: "false"

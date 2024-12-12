@@ -37,7 +37,7 @@ jobs:
           apps: plantuml doxygen handbrake-cli
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v1
+        uses: winpax/scoop-setup@v1.0.0
         with:
           buckets: extras
           apps: plantuml doxygen handbrake-cli
@@ -76,7 +76,7 @@ jobs:
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v1
+        uses: winpax/scoop-setup@v1.0.0
         with:
           buckets: extras
           apps: -foobar

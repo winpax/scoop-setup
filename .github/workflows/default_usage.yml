@@ -31,7 +31,7 @@ jobs:
         uses: winpax/scoop-setup@main
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v1
+        uses: winpax/scoop-setup@v1.0.0
 
       - name: Confirm scoop working
         shell: pwsh
