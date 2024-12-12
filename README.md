@@ -123,3 +123,7 @@ jobs:
           update: "false"
           update_path: "true"
 ```
+
+**Made with 💗 by Juliette Cordor**
+
+**Thanks to [Minoru Sekine](https://github.com/MinoruSekine) for creating the original `setup-scoop` action**
