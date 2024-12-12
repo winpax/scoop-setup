@@ -43,7 +43,7 @@ jobs:
           update_path: "true"
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v4
+        uses: winpax/scoop-setup@v1
         with:
           install_scoop: "false"
           update: "false"

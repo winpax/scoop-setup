@@ -35,7 +35,7 @@ jobs:
           buckets: java games php
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v4
+        uses: winpax/scoop-setup@v1
         with:
           buckets: java games php
 
@@ -106,7 +106,7 @@ jobs:
           buckets: extras
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v4
+        uses: winpax/scoop-setup@v1
         with:
           buckets: extras
 
@@ -144,7 +144,7 @@ jobs:
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v4
+        uses: winpax/scoop-setup@v1
         with:
           buckets: unknown
         continue-on-error: true

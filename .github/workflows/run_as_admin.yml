@@ -37,7 +37,7 @@ jobs:
         continue-on-error: true
 
       - if: ${{ github.event_name == 'schedule' }}
-        uses: winpax/scoop-setup@v4
+        uses: winpax/scoop-setup@v1
         with:
           run_as_admin: false
         continue-on-error: true
