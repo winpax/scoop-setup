@@ -19,7 +19,8 @@ inputs:
     required: true
     default: "false"
   update_path:
-    description: "Update PATH environment variable for workflow if true (default)|"
+    description: >-
+      "Update PATH environment variable for workflow if true (default)"
     required: true
     default: "true"
   buckets:
