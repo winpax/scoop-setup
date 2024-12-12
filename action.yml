@@ -1,56 +1,47 @@
-name: 'Setup scoop'
+name: "Setup Scoop"
 description: >-
   Install apps to Windows runner by scoop,
   and update PATH of your workflow.
 branding:
-  icon: 'hard-drive'
-  color: 'green'
+  icon: "hard-drive"
+  color: "green"
 inputs:
-  install_scoop:
-    description: 'Install scoop if true (default)'
+  scoop:
+    description: "Install scoop if true (default)"
     required: true
-    default: 'true'
-  add_extras_bucket:
-    description: 'This is obsoleted and use `buckets: extras`'
+    default: "true"
+  update:
+    description: "Call `scoop update` if true (default)"
     required: true
-    default: 'false'
-  add_nonportable_bucket:
-    description: 'This is obsoleted and use `buckets: nonportable`'
+    default: "true"
+  checkup:
+    description: "Call `scoop checkup` if true"
     required: true
-    default: 'false'
-  scoop_update:
-    description: 'Call scoop update if true (default)'
-    required: true
-    default: 'true'
-  scoop_checkup:
-    description: 'Call scoop checkup if true'
-    required: true
-    default: 'false'
+    default: "false"
   update_path:
-    description: >-
-      Update environment variable PATH for workflow if true (default)
+    description: "Update PATH environment variable for workflow if true (default)|"
     required: true
-    default: 'true'
+    default: "true"
   buckets:
-    description: 'Bucket(s) to add, delimit several buckets by white space'
+    description: "Bucket(s) to add, delimited by whitespace"
     required: false
-    default: ''
-  run_as_admin:
-    description: 'Install scoop with `-RunAsAdmin` or not'
+    default: ""
+  admin:
+    description: "Install scoop with `-RunAsAdmin`"
     required: false
-    default: true
+    default: "true"
   apps:
-    description: 'Apps to be installed'
+    description: "Apps to be installed"
     required: false
-    default: ''
+    default: ""
 runs:
   using: "composite"
   steps:
-    - name: 'Setup scoop'
+    - name: "Setup Scoop"
       shell: pwsh
       run: |
         if('${{ inputs.install_scoop }}' -eq 'true') {
-            if('${{ inputs.run_as_admin }}' -eq 'true') {
+            if('${{ inputs.admin }}' -eq 'true') {
                 ${{ env.SCRIPTS_PATH }}\install_scoop.ps1 -RunAsAdmin
             } else {
                 ${{ env.SCRIPTS_PATH }}\install_scoop.ps1
@@ -60,21 +51,13 @@ runs:
         if('${{ inputs.update_path }}' -eq 'true') {
             Join-Path (Resolve-Path ~).Path "scoop\shims" >> $Env:GITHUB_PATH
         }
-        if('${{ inputs.add_extras_bucket }}' -eq 'true') {
-            Write-Error 'setup-scoop: `add_extras_bucket`' `
-            ' is now obsoleted,use `buckets` instead.' -ErrorAction Stop
-        }
-        if('${{ inputs.add_nonportable_bucket }}' -eq 'true') {
-            Write-Error 'setup-scoop: `add_nonportable_bucket`' `
-            'is now obsoleted, use `buckets` instead.' -ErrorAction Stop
-        }
         Write-Host 'setup-scoop: inputs.buckets ${{ inputs.buckets }}'
         $param_buckets_string = "${{ inputs.buckets }}"
         if ($param_buckets_string) {
             ${{ env.SCRIPTS_PATH }}\add_buckets.ps1 "$param_buckets_string"
         }
-        if('${{ inputs.scoop_update }}' -eq 'true') {scoop update}
-        if('${{ inputs.scoop_checkup }}' -eq 'true') {scoop checkup}
+        if('${{ inputs.update }}' -eq 'true') {scoop update}
+        if('${{ inputs.checkup }}' -eq 'true') {scoop checkup}
         Write-Host 'setup-scoop: inputs.apps ${{ inputs.apps }}'
         $param_apps_string = "${{ inputs.apps }}"
         if ($param_apps_string) {
